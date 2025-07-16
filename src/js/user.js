@@ -1,4 +1,4 @@
-import { httpGet } from './http';
+import { httpGet } from './http.js';
 
 export function loadUser(id) {
   const data = httpGet(`http://server:8080/users/${id}`);
