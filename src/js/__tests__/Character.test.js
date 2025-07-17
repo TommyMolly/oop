@@ -1,4 +1,4 @@
-import Character from '../Character.js';
+import Character from '../class/Character.js';
 
 test('creates valid Character', () => {
   const character = new Character('Hero', 'Zombie');
@@ -7,8 +7,8 @@ test('creates valid Character', () => {
     type: 'Zombie',
     health: 100,
     level: 1,
-    attack: 0,
-    defence: 0,
+    attack: undefined,
+    defence: undefined,
   });
 });
 

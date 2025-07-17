@@ -1,15 +1,21 @@
-import Character from '../Character.js';
-import { Bowman } from '../characters.js';
+import Character from '../class/Character.js';
+import Bowman from '../class/Bowman.js';
 
 describe('Character methods', () => {
+  test('Character constructor validates name and type', () => {
+    expect(() => new Character('A', 'Zombie')).toThrow('Name must be a string with length from 2 to 10 characters');
+    expect(() => new Character('ValidName', 'UnknownType')).toThrow('Type must be one of: Bowman, Swordsman, Magician, Daemon, Undead, Zombie');
+    expect(() => new Character('HeroName', 'Magician')).not.toThrow();
+  });
+
   test('levelUp increases level, attack, defence, and sets health to 100', () => {
     const bowman = new Bowman('Robin');
     bowman.health = 50;
     bowman.levelUp();
 
     expect(bowman.level).toBe(2);
-    expect(bowman.attack).toBeCloseTo(30);
-    expect(bowman.defence).toBeCloseTo(30);
+    expect(bowman.attack).toBeCloseTo(30); // 25 * 1.2
+    expect(bowman.defence).toBeCloseTo(30); // 25 * 1.2
     expect(bowman.health).toBe(100);
   });
 
@@ -21,8 +27,8 @@ describe('Character methods', () => {
 
   test('damage reduces health correctly', () => {
     const bowman = new Bowman('Robin');
-    bowman.damage(40);
-    expect(bowman.health).toBe(70); // 40 * (1 - 0.25) = 30 damage
+    bowman.damage(40); // 40 * (1 - 0.25) = 30
+    expect(bowman.health).toBe(70);
   });
 
   test('damage cannot reduce health below 0', () => {
